@@ -182,6 +182,13 @@ getparentenv <- function(pkgname) {
                             generateResourceFile(storageCredentials$name, id, "worker.R", sasToken),
                             generateResourceFile(storageCredentials$name, id, "merger.R", sasToken))
 
+      # We need to merge any files passed by the calling lib with the resource files specified here
+      if (obj$resourceFiles) {
+        resourceFiles.append(resourceFiles, obj$resourceFiles)
+      }
+      print("resource files:")
+      print(resourceFiles)
+
       response <- addJob(id, config = data$config, packages = obj$packages, resourceFiles = resourceFiles, raw = TRUE)
       if(grepl("ActiveJobAndScheduleQuotaReached", response)){
         jobquotaReachedResponse <- grepl("ActiveJobAndScheduleQuotaReached", response)
@@ -319,7 +326,8 @@ getparentenv <- function(pkgname) {
 
     print(sprintf("Number of errors: %i", numberOfFailedTasks))
 
-    deleteJob(id)
+    #comment out for debugging
+    #deleteJob(id)
 
     if (identical(obj$errorHandling, 'stop') && !is.null(errorValue)) {
       msg <- sprintf('task %d failed - "%s"', errorIndex,
