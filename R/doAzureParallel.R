@@ -193,8 +193,6 @@ getparentenv <- function(pkgname) {
 
       # We need to merge any files passed by the calling lib with the resource files specified here
       resourceFiles <- append(resourceFiles, staticResourceFiles)
-      print("resource files:")
-      print(resourceFiles)
 
       response <- addJob(id, config = data$config, packages = obj$packages, resourceFiles = resourceFiles, raw = TRUE)
       if(grepl("ActiveJobAndScheduleQuotaReached", response)){
