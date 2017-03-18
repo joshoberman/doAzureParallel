@@ -184,7 +184,7 @@ getparentenv <- function(pkgname) {
 
       # We need to merge any files passed by the calling lib with the resource files specified here
       if (obj$resourceFiles) {
-        resourceFiles.append(resourceFiles, obj$resourceFiles)
+        resourceFiles.append(resourceFiles, obj$options$azure$resourceFiles)
       }
       print("resource files:")
       print(resourceFiles)
