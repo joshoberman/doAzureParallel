@@ -88,7 +88,7 @@ makeCluster <- function(fileName = "az_config.json", fullName = FALSE, wait = TR
       packages <- getGithubInstallationCommand(config$batchAccount$rPackages$github, config$batchAccount$rPackages$github_auth)
     }
     else{
-      packages <- paste0(packages, ";", getGithubInstallationCommand(config$batchAccount$rPackages$github))
+      packages <- paste0(packages, ";", getGithubInstallationCommand(config$batchAccount$rPackages$github, config$batchAccount$rPackages$github_auth))
     }
   }
 

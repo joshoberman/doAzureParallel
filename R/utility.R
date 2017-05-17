@@ -27,7 +27,7 @@ getGithubInstallationCommand <- function(packages, github_auth){
   if(length(packages) != 0){
     for(package in packages){
       installation <- paste0(installation,
-                             sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'devtools::install_github(args[1], auth_token = args[2])\' %s", package, github_auth),
+                             sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'devtools::install_github(args[1], auth_token = args[2])\' %s %s", package, github_auth),
                              ";")
     }
   }
