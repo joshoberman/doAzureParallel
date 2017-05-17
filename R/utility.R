@@ -18,7 +18,7 @@ getInstallationCommand <- function(packages){
   installation <- substr(installation, 1, nchar(installation) - 1)
 }
 
-getGithubInstallationCommand <- function(packages){
+getGithubInstallationCommand <- function(packages, github_auth){
   installation <- ""
   installation <- paste0(installation,
                          sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'install.packages(args[1], dependencies=TRUE)\' %s", "devtools"),
@@ -27,7 +27,7 @@ getGithubInstallationCommand <- function(packages){
   if(length(packages) != 0){
     for(package in packages){
       installation <- paste0(installation,
-                             sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'devtools::install_github(args[1])\' %s", package),
+                             sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'devtools::install_github(args[1], auth_token = args[2])\' %s", package, github_auth),
                              ";")
     }
   }
