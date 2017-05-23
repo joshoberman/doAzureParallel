@@ -299,9 +299,11 @@ workers <- function(data){
       msg <- sprintf('task %d failed - "%s"', errorIndex,
                      conditionMessage(errorValue))
       stop(simpleError(msg, call=expr))
+      deleteBlob(id)
     }
     else {
       getResult(it)
+      deleteBlob(id)
     }
   }
   else{
