@@ -351,17 +351,16 @@ setVerbose <- function(value = FALSE){
     print(sprintf("Number of errors: %i", numberOfFailedTasks))
 
     deleteJob(id)
+    deleteContainer(id)
 
     if (identical(obj$errorHandling, 'stop') && !is.null(errorValue)) {
       msg <- sprintf('task %d failed - "%s"', errorIndex,
                      conditionMessage(errorValue))
-      deleteContainer(id)
       stop(simpleError(msg, call=expr))
     }
     else {
       getResult(it)
     }
-    deleteContainer(id)
   }
   else{
     print("Because the 'wait' parameter is set to FALSE, the returned value is the job ID associated with the foreach loop. Use this returned value with getJobResults(job_id) to get the results when the foreach loop is completed in Azure")
