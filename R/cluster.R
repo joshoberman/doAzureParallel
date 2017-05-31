@@ -152,7 +152,7 @@ makeCluster <- function(clusterSetting = "cluster_settings.json", fullName = FAL
   }
   else{
     if(wait){
-      waitForNodesToComplete(pool$id, 60000)
+      waitForNodesToComplete(pool$id, 1000)
     }
   }
 

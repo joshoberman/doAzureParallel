@@ -81,7 +81,7 @@ setVerbose <- function(value = FALSE){
   argsList <- as.list(it)
 
   chunkSize <- 1
-  jobTimeout <- 60 * 60 * 24
+  jobTimeout <- 60 * 10
 
   if(!is.null(obj$options$azure$timeout)){
     jobTimeout <- obj$options$azure$timeout
