@@ -142,7 +142,6 @@ waitForNodesToComplete <- function(clusterId, timeout = 86400){
     Sys.sleep(30)
   }
 
-  deletePool(poolId)
   stop("Timeout expired")
 }
 
