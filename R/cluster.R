@@ -126,6 +126,15 @@ makeCluster <- function(clusterSetting = "cluster_settings.json", fullName = FAL
   if(!is.null(pool$rPackages) && !is.null(pool$rPackages$cran) && length(pool$rPackages$cran) > 0){
     packages <- getInstallationCommand(pool$rPackages$cran)
   }
+  
+  if(!is.null(pool$rPackages) && !is.null(pool$rPackages$url) && length(pool$rPackages$url) > 0){
+    if(is.null(packages)){
+      packages <- getURLInstallationCommand(pool$rPackages$url)
+    }
+    else{
+      packages <- paste0(packages, ";", getURLInstallationCommand(pool$rPackages$url))
+    }
+  }
 
   if(!is.null(pool$rPackages) && !is.null(pool$rPackages$github) && length(pool$rPackages$github) > 0){
     if(is.null(packages)){
@@ -152,7 +161,7 @@ makeCluster <- function(clusterSetting = "cluster_settings.json", fullName = FAL
   }
   else{
     if(wait){
-      waitForNodesToComplete(pool$id, 1000)
+      waitForNodesToComplete(pool$id, 60 * 60)
     }
   }
 

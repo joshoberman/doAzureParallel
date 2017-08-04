@@ -10,6 +10,23 @@ getInstallationCommand <- function(packages){
   installation <- substr(installation, 1, nchar(installation) - 1)
 }
 
+getURLInstallationCommand <- function(packages){
+  installation <- ""
+  installation <- paste0(installation,
+                         sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'install.packages(args[1], dependencies=TRUE)\' %s", "devtools"),
+                         ";")
+  
+  if(length(packages) != 0){
+    for(package in packages){
+      installation <- paste0(installation,
+                             sprintf("Rscript -e \'args <- commandArgs(TRUE)\' -e \'devtools::install_url(args[1])\' %s %s", package),
+                             ";")
+    }
+  }
+  
+  installation <- substr(installation, 1, nchar(installation) - 1)
+}
+
 getGithubInstallationCommand <- function(packages, github_auth){
   installation <- ""
   installation <- paste0(installation,
